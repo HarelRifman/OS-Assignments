@@ -24,7 +24,7 @@ void copy_symlink(const char *src, const char *dst) {
         return;
     }
     target[len] = '\0';
-    if (symlink(target, dst) == -1) {
+    if (symlink(target, dst) == -1) { //Create a new symlink at dst, pointing to the same target as src
         perror("symlink");
     }
 }

@@ -5,6 +5,7 @@
 #include <sys/wait.h>
 
 #define NUM_GLADIATORS 4
+#define MAX_FILE_NAME 10
 
 int main() {
     char* gladiator_names[NUM_GLADIATORS] = {"Maximus", "Lucius", "Commodus", "Spartacus"};
@@ -18,23 +19,18 @@ int main() {
     for (int i = 0; i < NUM_GLADIATORS; i++) {
         gladiator_pids[i] = fork();
         
-        if (gladiator_pids[i] < 0) {
-            perror("Fork failed");
-            exit(1);
-        } else if (gladiator_pids[i] == 0) {
+        if (gladiator_pids[i] == 0) {
             // Child process - execute the gladiator program
-            char filename[10];
+            char filename[MAX_FILE_NAME];
             sprintf(filename, "%s", gladiator_files[i]);
             char* args[] = {"./gladiator", filename, NULL};
             execvp(args[0], args);
-            perror("Exec failed");
-            exit(1);
         }
     }
-    
+
+    int status;
     // Wait for gladiators to finish, recording the order they finish in
     while (elimination_count < NUM_GLADIATORS) {
-        int status;
         pid_t finished_pid = wait(&status);
         
         // Find which gladiator just finished

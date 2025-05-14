@@ -15,21 +15,13 @@ void process_read(int data_fd, int results_fd, off_t start, off_t end) {
     if (start < 0 || end < 0 || start > end || start >= file_stat.st_size)
         return;
 
-    if (end >= file_stat.st_size)
+    if (end >= file_stat.st_size) //update the end of the output to match the end of the file
         end = file_stat.st_size - 1;
 
     off_t len = end - start + 1;
     char *buffer = malloc(len);
-    if (!buffer) {
-        perror("malloc");
-        return;
-    }
 
-    if (lseek(data_fd, start, SEEK_SET) == -1) {
-        perror("lseek");
-        free(buffer);
-        return;
-    }
+    lseek(data_fd, start, SEEK_SET);
 
     ssize_t bytes_read = read(data_fd, buffer, len);
     if (bytes_read <= 0) {
@@ -44,10 +36,7 @@ void process_read(int data_fd, int results_fd, off_t start, off_t end) {
 
 void process_write(int data_fd, off_t offset, const char *text) {
     struct stat st;
-    if (fstat(data_fd, &st) == -1) {
-        perror("fstat");
-        return;
-    }
+    fstat(data_fd, &st);
 
     if (offset < 0 || offset > st.st_size)
         return;
@@ -55,11 +44,6 @@ void process_write(int data_fd, off_t offset, const char *text) {
     size_t text_len = strlen(text);
     size_t trailing_size = st.st_size - offset;
     char *trailing_data = malloc(trailing_size);
-
-    if (trailing_size > 0 && !trailing_data) {
-        perror("malloc");
-        return;
-    }
 
     if (trailing_size > 0) {
         if (lseek(data_fd, offset, SEEK_SET) == -1 ||

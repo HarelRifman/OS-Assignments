@@ -1,4 +1,4 @@
-Gladiator process started. 33620: 
+Gladiator process started. 593: 
 Facing opponent 2... Taking 100 damage
 Are you not entertained? Remaining health: 1500
 Facing opponent 3... Taking 90 damage
