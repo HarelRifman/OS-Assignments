@@ -1,7 +1,5 @@
 # Exercise 2: Operating Systems
-
-## Due Date
-The due date for this exercise is **18.5.2025, 23:59**.
+The folders contain also test files the raw code is stored in the zip file :)
 
 ## Submission Instructions
 Submit your solution as a zip file containing **ONLY** the following files:
