@@ -87,15 +87,13 @@ int main(int argc, char *argv[]) {
 
     struct stat st;
 
-    // Check if source exists and is a directory
     if (stat(argv[1], &st) == -1 || !S_ISDIR(st.st_mode)) {
         perror("src dir");
         return 1;
     }
 
-    // Check that destination does not exist
     if (access(argv[2], F_OK) == 0) {
-        perror("backup dir");
+        fprintf(stderr, "Backup dir\n");
         return 1;
     }
 

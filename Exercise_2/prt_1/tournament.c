@@ -6,7 +6,7 @@
 
 #define NUM_GLADIATORS 4
 #define MAX_FILE_NAME 10
-
+int cal;
 int main() {
     char* gladiator_names[NUM_GLADIATORS] = {"Maximus", "Lucius", "Commodus", "Spartacus"};
     char* gladiator_files[NUM_GLADIATORS] = {"G1", "G2", "G3", "G4"};
