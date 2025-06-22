@@ -259,4 +259,3 @@ EOF
     rm -r "$LOG_DIR"
 
 fi
-

@@ -17,12 +17,10 @@ fi
 
 # Display the metadata from the PGN file
 echo "Metadata from PGN file:"
-grep '^\[' "$1"
 
 # Extract the moves part from the PGN file
 # Finally fixed this regex after 3 hours of banging my head against the wall
 moves_txt=$(sed -n '/^\[/d; /^$/d; p' "$1" | tr '\n' ' ')
-
 
 # Convert the moves to UCI format using the provided Python script
 uci_stuff=$(python3 parse_moves.py "$moves_txt" 2>/dev/null)

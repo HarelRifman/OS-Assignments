@@ -12,8 +12,10 @@ void process_read(int data_fd, int results_fd, off_t start, off_t end) {
         return;
     }
 
-    if (start < 0 || end < 0 || start > end || start >= file_stat.st_size) {
-        return;
+    // More strict validation - don't process if end is beyond file
+    if (start < 0 || end < 0 || start > end || 
+        start >= file_stat.st_size || end >= file_stat.st_size) {
+        return;  // Skip this read entirely
     }
 
     if (end >= file_stat.st_size) {
